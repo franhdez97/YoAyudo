@@ -34,7 +34,7 @@
               "src/styles.sass",
               "node_modules/bootswatch/dist/superhero/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [ ]
           },
           "configurations": {
             "production": {

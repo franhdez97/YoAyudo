@@ -5,12 +5,25 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ 'Lorem ipsum dolor, sit amet consectetur adipisicing elit' | uppercase}}</h5>
+                        <div class="flex-card-title">
+                            <h5 class="card-title">
+                                {{ 'Lorem ipsum dolor, sit amet consectetur adipisicing elit' | uppercase}}
+                            </h5>
+                            <div>
+                                <div class="card-importance bg-success"></div>
+                            </div>
+                        </div>
                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi sit at fugit quo voluptas eum totam, accusamus nam pariatur sint!</p>
                         <div class="btn-group" role="group" aria-label="Opciones">
-                            <button type="button" class="btn btn-success" (click)="answerHelp()">Responder</button>
-                            <button type="button" class="btn btn-danger" (click)="ignoreHelp()">Ignorar</button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#helpModal">Ver más</button>
+                            <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()">
+                                <span class="material-icons">send</span>&nbsp;Responder
+                            </button>
+                            <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()">
+                                <span class="material-icons">thumb_down</span>&nbsp;Ignorar
+                            </button>
+                            <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal" data-bs-target="#helpModal">
+                                <span class="material-icons">info</span>&nbsp;Ver más
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -18,12 +31,25 @@
             <div class="col-sm-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">{{ 'Lorem ipsum dolor, sit amet consectetur adipisicing elit' | uppercase}}</h5>
+                        <div class="flex-card-title">
+                            <h5 class="card-title">
+                                {{ 'Lorem ipsum dolor, sit amet consectetur adipisicing elit' | uppercase}}
+                            </h5>
+                            <div>
+                                <div class="card-importance bg-danger"></div>
+                            </div>
+                        </div>
                         <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi sit at fugit quo voluptas eum totam, accusamus nam pariatur sint!</p>
                         <div class="btn-group" role="group" aria-label="Opciones">
-                            <button type="button" class="btn btn-success" (click)="answerHelp()">Responder</button>
-                            <button type="button" class="btn btn-danger" (click)="ignoreHelp()">Ignorar</button>
-                            <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#helpModal">Ver más</button>
+                            <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()">
+                                <span class="material-icons">send</span>&nbsp;Responder
+                            </button>
+                            <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()">
+                                <span class="material-icons">thumb_down</span>&nbsp;Ignorar
+                            </button>
+                            <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal" data-bs-target="#helpModal">
+                                <span class="material-icons">info</span>&nbsp;Ver más
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -33,18 +59,25 @@
 
     <!-- Comienzo Modal -->
     <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            ...
+                <div class="row">
+                    <h2>Ubicación</h2>
+                    <h4 class="modal-ubication">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, nobis.
+                    </h4>
+                </div>
+                <div class="row">
+                    <img src="../../../assets/img/test.jpg" alt="Imagen de referencia">
+                </div>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
         </div>

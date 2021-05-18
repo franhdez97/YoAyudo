@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // Paa las peticiones de ayuda
+  // Para las peticiones de ayuda
   public answerHelp(): void {
     notie.input({
       text: 'Ingresa una respuesta (es opcional)',

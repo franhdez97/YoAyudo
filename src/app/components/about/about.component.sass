@@ -1,0 +1,45 @@
+.flex-about
+    display: flex
+    flex-direction: column
+    margin: 1rem 0 2rem 0
+.to-bottom
+    display: flex
+    flex-direction: row
+    justify-content: center
+    align-items: center
+.text-justify
+    text-align: justify
+.bg-title-about
+    border-radius: 2rem
+    padding: .5rem
+    margin: 1rem 0
+    font-weight: bold
+img
+    margin: 0 1rem
+span
+    font-weight: bold
+    // font-size: 1.2rem
+    text-transform: uppercase
+a
+    text-decoration: none
+.no-bold
+    text-transform: none
+
+.playstore
+    display: flex
+    justify-content: flex-end
+.playstore__bg
+    border-radius: 1rem
+    padding: .5rem
+
+@media (min-width: 1200px)
+    .flex-about
+        flex-direction: row
+        justify-content: space-between
+        flex-wrap: nowrap
+    .to-bottom
+        flex-direction: column
+        justify-content: flex-end
+        margin-left: 1rem
+    img
+        margin: 0

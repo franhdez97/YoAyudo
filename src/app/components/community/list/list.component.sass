@@ -1,0 +1,30 @@
+@use '../../../../assets/sass/colors'
+
+// Generales
+
+.border-posts
+    border: .15rem colors.$primary solid
+    border-radius: 1rem
+    padding: 1rem
+
+.grid-posts
+    display: grid
+    grid-template-columns: 100%
+    row-gap: .5rem
+
+.sidebar-right
+    margin: 0 1rem
+
+.sidebar-left
+    margin: 0 1rem
+
+@media (min-width: 768px)
+    .grid-posts
+        grid-template-columns: 25% 75%
+    .sidebar-right
+        margin-right: 1rem
+        margin-left: .5rem
+
+    .sidebar-left
+        margin-left: 1rem
+        margin-right: .5rem

@@ -3,3 +3,24 @@
     padding: .1rem
     margin: 1rem auto
     width: 50%
+
+.pos-fixed-right
+    position: static
+    display: flex
+    justify-content: center
+    // padding-bottom: .5rem
+
+.pos-fixed-left
+    position: static
+    display: flex
+    justify-content: center
+
+@media (min-width:  768px)
+    .pos-fixed-right
+        position: absolute
+        top: 0
+        right: 0
+    .pos-fixed-left
+        position: absolute
+        top: 0
+        left: 0

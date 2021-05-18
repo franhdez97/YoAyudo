@@ -1,5 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~notie/dist/notie.min.css'
+$notie-color-success: #5cb85c
+$notie-color-warning: #ffc107
+$notie-color-error: #d9534f
+$notie-color-info: #4c9be8
+$notie-color-neutral: #4e5d6c
+$notie-color-overlay: #4A4A4A
+
+/* Antes: dist/notie.min.css */
+@import '~notie/src/notie'
 
 html
     scroll-behavior: smooth
@@ -8,3 +16,26 @@ html
     padding: 0
 body
     box-sizing: border-box
+
+/* Scrollbar personalizado */
+body::-webkit-scrollbar
+    -webkit-appearance: none
+
+body::-webkit-scrollbar:vertical
+    width: .75rem
+
+body::-webkit-scrollbar-button:increment,body::-webkit-scrollbar-button
+    display: none
+
+body::-webkit-scrollbar:horizontal
+    height: .75rem
+
+body::-webkit-scrollbar-thumb
+    background-color: #797979
+    border-radius: 2rem
+
+    &:hover
+        background-color: #A1A1A1
+
+body::-webkit-scrollbar-track
+    background-color: #484848

@@ -1,3 +1,83 @@
-<app-header></app-header>
+<!--
+    * ngIf="1 < 2"
+    Sera remplazado por la validacion si la sesion esta activa para eliminar el header, footer y formulario de ayuda.
+    Asi solo mostrar las demas opciones sin tener acceso a eso.
+-->
+
+<app-header *ngIf="1 < 2"></app-header>
 <router-outlet></router-outlet>
-<app-footer></app-footer>
+
+<!-- Comienzo Modal Reporte // antes => data-bs-scroll="true" data-bs-backdrop="false"-->
+<div class="offcanvas offcanvas-start" tabindex="-1"
+id="reportCanvas" *ngIf="1 < 2">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title">Formulario de ayuda</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div>
+            <label class="form-label">Por favor, completa todos los campos.</label>
+        </div>
+        <form class="form" [formGroup]="form" (ngSubmit)="sendForm($event)">
+            <div class="my-2">
+                <div class="form-label">Descripción</div>
+                <textarea class="form-control" placeholder="Hay un drenaje de agua rota cerca de mi casa"
+                rows="4" formControlName="descripcion"></textarea>
+
+                <div *ngIf="form.get('descripcion')?.errors && form.get('descripcion')?.touched">
+                    <small *ngIf="form.get('descripcion')?.hasError('required')"
+                            class="text-warning">
+                        Es un campo requerido
+                    </small>
+                </div>
+            </div>
+            <div class="mb-2">
+                <div class="form-label">Referencia del lugar</div>
+                <textarea class="form-control"
+                    placeholder="Cerca de una ferreteria, 3 cuadras abajo de un restaurante de comida"
+                    rows="2" formControlName="lugar"></textarea>
+
+                <div *ngIf="form.get('lugar')?.errors && form.get('lugar')?.touched">
+                    <small *ngIf="form.get('lugar')?.hasError('required')" class="text-warning">
+                        Es un campo requerido
+                    </small>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-label">Foto del accidente (Opcional)</div>
+                <input class="form-control" type="file" accept="image/*" formControlName="foto">
+            </div>
+            <div class="mb-2">
+                <div class="form-label">Gravedad</div>
+                <div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" 
+                                name="importancia" formControlName="importancia"
+                                id="radio-option1" value="0">
+                        <label class="form-check-label" for="radio-option1">
+                            Puede esperar
+                        </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio"
+                                name="importancia" formControlName="importancia"
+                                id="radio-option2" value="1">
+                        <label class="form-check-label" for="radio-option2">
+                            Muy urgente
+                        </label>
+                    </div>
+                </div>
+
+                <div *ngIf="form.get('importancia')?.errors && form.get('importancia')?.touched">
+                    <small *ngIf="form.get('importancia')?.hasError('required')" class="text-warning">
+                        Es un campo requerido
+                    </small>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+            <button type="reset" class="btn btn-secondary">Cancelar</button>
+        </form>
+    </div>
+</div>
+<!-- Cierre Modal Reporte -->
+<app-footer *ngIf="1 < 2"></app-footer>

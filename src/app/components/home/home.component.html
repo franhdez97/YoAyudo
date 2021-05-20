@@ -2,19 +2,18 @@
     <!-- Comienzo Container -->
 
     <div class="row">
-        <div class="col-sm-12 col-md-6 my-1" *ngFor="let x of [1,2,3,4,5,6]">
+        <div class="col-sm-12 col-md-6 my-1" *ngFor="let help of listHelp">
             <div class="card">
                 <div class="card-body">
                     <div class="flex-card-title">
                         <h5 class="card-title">
-                            {{ 'Lorem ipsum dolor, sit amet consectetur adipisicing elit' | uppercase}}
+                            {{ help.lugar| uppercase}}
                         </h5>
                         <div>
-                            <div class="card-importance bg-success"></div>
+                            <div class="card-importance {{ help.estado ? 'bg-danger' : 'bg-success' }}"></div>
                         </div>
                     </div>
-                    <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi sit at fugit
-                        quo voluptas eum totam, accusamus nam pariatur sint!</p>
+                    <p class="card-text">{{ help.descripcion }}</p>
                     <div class="flex-button-options">
                         <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()">
                             <span class="material-icons">send</span>&nbsp;Responder
@@ -29,32 +28,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="col-sm-12 col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="flex-card-title">
-                            <h5 class="card-title">
-                                {{ 'Lorem ipsum dolor, sit amet consectetur adipisicing elit' | uppercase}}
-                            </h5>
-                            <div>
-                                <div class="card-importance bg-danger"></div>
-                            </div>
-                        </div>
-                        <p class="card-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eligendi sit at fugit quo voluptas eum totam, accusamus nam pariatur sint!</p>
-                        <div class="flex-button-options">
-                            <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()">
-                                <span class="material-icons">send</span>&nbsp;Responder
-                            </button>
-                            <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()">
-                                <span class="material-icons">thumb_down</span>&nbsp;Ignorar
-                            </button>
-                            <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal" data-bs-target="#helpModal">
-                                <span class="material-icons">info</span>&nbsp;Ver más
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 
@@ -84,85 +57,5 @@
         </div>
     </div>
     <!-- Cierre Modal detalle -->
-
-    <!-- Comienzo Modal Reporte // antes => data-bs-scroll="true" data-bs-backdrop="false"-->
-    <div class="offcanvas offcanvas-start" tabindex="-1"
-        id="reportCanvas" *ngIf="1 < 2">
-        <div class="offcanvas-header">
-            <h5 class="offcanvas-title">Formulario de ayuda</h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body">
-            <div>
-                <label class="form-label">Por favor, completa todos los campos.</label>
-            </div>
-            <form class="form" [formGroup]="form" (ngSubmit)="sendForm($event)">
-                <div class="my-2">
-                    <div class="form-label">Descripción</div>
-                    <textarea class="form-control" placeholder="Hay un drenaje de agua rota cerca de mi casa"
-                    rows="4" formControlName="description"></textarea>
-
-                    <div *ngIf="form.get('description')?.errors && form.get('description')?.touched">
-                        <small *ngIf="form.get('description')?.hasError('required')"
-                                class="text-warning">
-                            Es un campo requerido
-                        </small>
-                    </div>
-                </div>
-                <div class="mb-2">
-                    <div class="form-label">Referencia del lugar</div>
-                    <textarea class="form-control"
-                        placeholder="Cerca de una ferreteria, 3 cuadras abajo de un restaurante de comida"
-                        rows="2" formControlName="references"></textarea>
-
-                    <div *ngIf="form.get('references')?.errors && form.get('references')?.touched">
-                        <small *ngIf="form.get('references')?.hasError('required')" class="text-warning">
-                            Es un campo requerido
-                        </small>
-                    </div>
-                </div>
-                <div class="mb-3">
-                    <div class="form-label">Foto del accidente (Opcional)</div>
-                    <input class="form-control" type="file" accept="image/*" formControlName="photo">
-
-                    <div *ngIf="form.get('photo')?.errors && form.get('photo')?.touched">
-                        <small *ngIf="form.get('photo')?.hasError('required')" class="text-warning">
-                            Es un campo requerido
-                        </small>
-                    </div>
-                </div>
-                <div class="mb-2">
-                    <div class="form-label">Gravedad</div>
-                    <div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" 
-                                    name="importance" formControlName="importance"
-                                    id="radio-option1" value="0">
-                            <label class="form-check-label" for="radio-option1">
-                                Puede esperar
-                            </label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio"
-                                    name="importance" formControlName="importance"
-                                    id="radio-option2" value="1">
-                            <label class="form-check-label" for="radio-option2">
-                                Muy urgente
-                            </label>
-                        </div>
-                    </div>
-
-                    <div *ngIf="form.get('importance')?.errors && form.get('importance')?.touched">
-                        <small *ngIf="form.get('importance')?.hasError('required')" class="text-warning">
-                            Es un campo requerido
-                        </small>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-                <button type="reset" class="btn btn-secondary">Cancelar</button>
-            </form>
-        </div>
-    </div>
-    <!-- Cierre Modal Reporte -->
 
 </div> <!-- Cierre del container -->

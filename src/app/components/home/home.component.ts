@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import notie from 'notie';
+import { Help } from 'src/app/shared/model/help.model';
+import { HelpService } from 'src/app/shared/services/help.service';
 
 @Component({
   selector: 'app-home',
@@ -8,19 +9,21 @@ import notie from 'notie';
   styleUrls: ['./home.component.sass']
 })
 export class HomeComponent implements OnInit {
+  public listHelp: Help[] = [];
 
-  public form: FormGroup;
-  
-  constructor() {
-    this.form = new FormGroup({
-      description: new FormControl('', [Validators.required]),
-      references: new FormControl('', [Validators.required]),
-      photo: new FormControl('', []),
-      importance: new FormControl('', [Validators.required])
-    });
+  constructor(private helpServ: HelpService) {
   }
 
   ngOnInit(): void {
+    // Despues se mandara el rol de usuario...
+    this.helpServ.getHelp(1).subscribe(
+      value => {
+        this.listHelp = value;
+      },
+      error => {
+        console.log(error);
+      }
+    );
   }
 
   // Para las peticiones de ayuda
@@ -48,18 +51,4 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-
-  public sendForm(event: Event) {
-    event.preventDefault();
-
-    if (this.form.valid) {
-      const value = this.form.value;
-      this.form.reset();
-
-      notie.alert({ type: 1, text: 'Reporte enviado' });
-    } else {
-      this.form.markAllAsTouched();
-    }
-  }
-
 }

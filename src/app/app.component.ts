@@ -3,6 +3,7 @@ import notie from 'notie';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { HelpService } from './shared/services/help.service';
 import { Help } from './shared/model/help.model';
+import { LoginService } from './shared/services/login.service';
 
 @Component({
   selector: 'app-root',
@@ -12,14 +13,19 @@ import { Help } from './shared/model/help.model';
 export class AppComponent implements OnInit {
   public form: FormGroup;
   
-  constructor(private helpServ: HelpService) {
+  constructor(
+    private helpServ: HelpService,
+    public loginServ: LoginService
+  ) {
     this.form = new FormGroup({
+      categoria: new FormControl('', [Validators.required]),
       descripcion: new FormControl('', [Validators.required]),
       lugar: new FormControl('', [Validators.required]),
       foto: new FormControl('', []),
       importancia: new FormControl('', [Validators.required])
     });
   }
+
   ngOnInit(): void {
   }
 

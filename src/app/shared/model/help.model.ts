@@ -8,6 +8,7 @@ export class Help {
     respuesta: string;
     usuario_id: number;
     municipio_id: number;
+    categoria: number;
     importancia: number;
 
     constructor(help: any) {
@@ -20,6 +21,7 @@ export class Help {
             this.respuesta = help.respuesta;
             this.usuario_id = help.usuario_id;
             this.municipio_id = help.municipio_id;
+            this.categoria = parseInt(help.categoria);
             this.importancia = parseInt(help.importancia);
     }
 }

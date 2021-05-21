@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import notie from 'notie';
 import { Help } from 'src/app/shared/model/help.model';
 import { HelpService } from 'src/app/shared/services/help.service';
+import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -11,19 +12,25 @@ import { HelpService } from 'src/app/shared/services/help.service';
 export class HomeComponent implements OnInit {
   public listHelp: Help[] = [];
 
-  constructor(private helpServ: HelpService) {
+  constructor(
+    private helpServ: HelpService,
+    private loginServ: LoginService
+  ) {
   }
 
   ngOnInit(): void {
-    // Despues se mandara el rol de usuario...
-    this.helpServ.getHelp(1).subscribe(
-      value => {
-        this.listHelp = value;
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    this.loginServ.getLocalStorage();
+    
+    if(this.loginServ.SESSION?.id) {
+      this.helpServ.getHelp(this.loginServ.SESSION?.id).subscribe(
+        value => {
+          this.listHelp = value;
+        },
+        error => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   // Para las peticiones de ayuda

@@ -1,0 +1,22 @@
+@use '../../../assets/sass/colors'
+    
+.flex-login
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+
+.container-login
+    width: 50%
+    margin: 0 auto
+    position: absolute
+    transform: translate(50%, 50%)
+    background-color: colors.$secondary
+    padding: 1rem
+    border-radius: 2rem
+
+@media (min-width:  768px)
+    .flex-login
+        justify-content: space-evenly
+        flex-direction: row
+    

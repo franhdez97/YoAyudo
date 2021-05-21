@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import notie from 'notie';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-header',
@@ -8,20 +8,13 @@ import notie from 'notie';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(public loginServ: LoginService) { }
 
   ngOnInit(): void {
   }
 
   public logout(): void {
-    notie.confirm({
-      text: '¿Desea cerrar sesión?',
-      submitText: 'Confirmar',
-      cancelText: 'Cancelar',
-      submitCallback: function () {
-        notie.alert({ type: 'success', text: "Nos vemos pronto :')"});
-      }
-    });
+    this.loginServ.destroySession();
   }
 
 }

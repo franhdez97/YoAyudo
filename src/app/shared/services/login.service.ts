@@ -68,7 +68,7 @@ export class LoginService {
   public getLocalStorage() {
     try {
       this.SESSION = JSON.parse(localStorage.getItem(USER_LOCAL) || '{}');
-      if (!this.SESSION?.id) { // Para cuando solo cuando no tenga nada verifique
+      if (!this.SESSION?.id || this.router.url === "/") { // Para cuando solo cuando no tenga nada verifique
         this.getUser();
       }
     } catch (error) {

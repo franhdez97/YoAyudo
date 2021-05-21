@@ -15,6 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ProfileComponent } from './components/profile/profile.component';
+import { PersonFormComponent } from './shared/forms/person-form/person-form.component';
+import { PersonFormModule } from './shared/forms/person-form/person-form.module';
 
 @NgModule({
   declarations: [
@@ -28,14 +30,16 @@ import { ProfileComponent } from './components/profile/profile.component';
     AboutComponent,
     LoginComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    PersonFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    PersonFormModule // Para usarlo en el registro y perfil
   ],
   providers: [],
   bootstrap: [AppComponent]

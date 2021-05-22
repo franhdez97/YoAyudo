@@ -1,40 +1,65 @@
-<form (ngSubmit)="sendForm($event)">
+<form [formGroup]="formPersona" (ngSubmit)="sendForm($event)">
     <div class="form__img mb-4">
+        <img [src]="person?.foto" alt="Foto de perfil" width="256" height="256">
         <div class="form__img__flex">
             <span class="mb-2">Escoge una foto</span>
-            <input type="file" class="form-control">
+            <input type="file" class="form-control" formControlName="foto">
         </div>
-        <img src="../../../assets/img/test.jpg" alt="Foto de perfil" width="256" height="256">
     </div>
     <div class="form__grid mb-3">
         <span>Nombre publico</span>
         <div class="form__grid__flex">
-            <input type="text" class="form-control" placeholder="Nombre" [value]="person.nombre">
+            <input type="text" class="form-control" placeholder="Nombre" [value]="person?.nombre"
+                formControlName="nombre">
             <div class="divider"></div>
-            <input type="text" class="form-control" placeholder="Apellido" [value]="person.apellido">
+            <input type="text" class="form-control" placeholder="Apellido" [value]="person?.apellido"
+                formControlName="apellido">
         </div>
     </div>
     <div class="form__grid mb-3">
         <span>Genero</span>
-        
+        <!-- form-switch-custom -->
+        <div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="genero" formControlName="genero" id="inlineRadio1" value="option1" [checked]="person?.genero == 0">
+                <label class="form-check-label" for="inlineRadio1">Hombre</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="genero" formControlName="genero" id="inlineRadio2" value="option2" [checked]="person?.genero == 1">
+                <label class="form-check-label" for="inlineRadio2">Mujer</label>
+            </div>
+        </div>
     </div>
     <div class="form__grid mb-3">
         <span>Fecha de nacimiento</span>
-        
+        <input type="date" class="form-control" [value]="person?.fecha_nac"
+                formControlName="fecha_nac">
     </div>
     <div class="form__grid mb-3">
         <span>Lugar Residencia</span>
         <div class="form__grid__flex">
-            <select class="form-control">
+            <select class="form-select" formControlName="depsv">
                 <option value="">Departamento</option>
+                <option value="1"></option>
+                <option value="2"></option>
+                <option value="3"></option>
+                <option value="4"></option>
+                <option value="5"></option>
+                <option value="6"></option>
+                <option value="7"></option>
+                <option value="8"></option>
+                <option value="9"></option>
+                <option value="10"></option>
+                <option value="11"></option>
+                <option value="12"></option>
             </select>
             <div class="divider"></div>
-            <select class="form-control">
+            <select class="form-select" formControlName="munsv">
                 <option value="">Municipio</option>
             </select>
         </div>
     </div>
     <div class="text-center my-4">
-        <button type="submit" class="btn btn-primary w-50">Guardar</button>
+        <button type="submit" class="btn btn-primary w-50" [disabled]="formPersona.invalid">Guardar</button>
     </div>
 </form>

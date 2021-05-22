@@ -39,14 +39,10 @@ export class LoginService {
         if(result?.id) {
           this.SESSION = result;
           this.addLocalStorage(result);
-          if(this.router.url === "" || this.router.url === "/") {
-            this.router.navigate(['/home']);
-          }
         }
         else {
           this.SESSION = new User();
-          this.router.navigate(['/']);
-          this.clearStorage();
+          this.addLocalStorage(this.SESSION);
         }
       }
     );
@@ -68,9 +64,6 @@ export class LoginService {
   public getLocalStorage() {
     try {
       this.SESSION = JSON.parse(localStorage.getItem(USER_LOCAL) || '{}');
-      if (!this.SESSION?.id || this.router.url === "/") { // Para cuando solo cuando no tenga nada verifique
-        this.getUser();
-      }
     } catch (error) {
       console.log(error);
     }

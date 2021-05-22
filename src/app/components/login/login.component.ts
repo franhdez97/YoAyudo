@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { User } from 'src/app/shared/model/user.model';
 import { LoginService } from 'src/app/shared/services/login.service';
 import notie from 'notie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loginServ.getLocalStorage();
   }
 
   public sendForm(event: Event) {
@@ -40,10 +41,10 @@ export class LoginComponent implements OnInit {
           if(result?.id) {
             this.loginServ.SESSION = result;
             this.loginServ.getUser();
-            // this.router.navigate(['/home']);
+            this.router.navigate(['/', 'home']);
           }
           else {
-            notie.alert({ 'type': 'error', 'text': 'El correo o contraseña no coinciden'})
+            notie.alert({ 'type': 'error', 'text': 'El correo o contraseña no coinciden'});
           }
         }
       );

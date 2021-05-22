@@ -6,6 +6,9 @@ img
     margin: 1rem
     cursor: pointer
 
+input[type="radio"]
+    cursor: pointer
+
 .divider
     padding: 0 .25rem
     background-color: colors.$primary
@@ -22,6 +25,7 @@ img
 
 .form__img
     display: flex
+    flex-direction: column
     align-items: center
     justify-content: center
     border-bottom: .2rem white solid
@@ -36,4 +40,8 @@ img
     .form__grid
         grid-template-columns: 25% 75%
         column-gap: .5rem
-    
+@media (min-width: 768px)
+    .form__img
+        align-items: center
+        justify-content: center
+        flex-direction: row

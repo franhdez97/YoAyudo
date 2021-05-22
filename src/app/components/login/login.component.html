@@ -1,36 +1,49 @@
-<div class="container-login">
-    <div class="flex-login">
-        <div class="text-center">
-            <h1>Hola</h1>
-            <p>Te doy la bienvenida</p>
-        </div>
+<div class="login">
+    <div class="container-login">
+        <div class="flex-login">
+            <div class="text-center">
+                <h1>Hola</h1>
+                <p>Te doy la bienvenida</p>
     
-        <form class="form" [formGroup]="formLogin" (ngSubmit)="sendForm($event)">
-            <div class="mb-3">
-                <label class="form-label">Usuario</label>
-                <input type="email" class="form-control" formControlName="username">
-
-                <div *ngIf="formLogin.get('username')?.errors && formLogin.get('username')?.touched">
-                    <small *ngIf="formLogin.get('username')?.hasError('required')"
-                            class="text-warning">
-                        Es un campo requerido
-                    </small>
+                <div class="text-center my-4">
+                    <div>
+                        <div class="text-muted my-2">¿No tienes una cuenta?</div>
+                        <button type="submit" class="btn btn-outline-primary" routerLink="register">Registrate</button>
+                    </div>
                 </div>
             </div>
-            <div class="mb-3">
-                <label class="form-label">Contraseña</label>
-                <input type="password" class="form-control" formControlName="passwd">
-
-                <div *ngIf="formLogin.get('passwd')?.errors && formLogin.get('passwd')?.touched">
-                    <small *ngIf="formLogin.get('passwd')?.hasError('required')"
-                            class="text-warning">
-                        Es un campo requerido
-                    </small>
+        
+            <form class="form" [formGroup]="formLogin" (ngSubmit)="sendForm($event)">
+                <div class="mb-3">
+                    <label class="form-label">Usuario</label>
+                    <input type="text" class="form-control" formControlName="username">
+    
+                    <div *ngIf="formLogin.get('username')?.errors && formLogin.get('username')?.touched">
+                        <small *ngIf="formLogin.get('username')?.hasError('required')"
+                                class="text-warning">
+                            Es un campo requerido
+                        </small>
+                    </div>
                 </div>
-
-                <div class="form-text">Nunca compartas tu contraseña.</div>
-            </div>
-            <button type="submit" class="btn btn-primary">Entrar</button>
-        </form>
+                <div class="mb-3">
+                    <label class="form-label">Contraseña</label>
+                    <input type="password" class="form-control" formControlName="passwd" autocomplete="on">
+    
+                    <div *ngIf="formLogin.get('passwd')?.errors && formLogin.get('passwd')?.touched">
+                        <small *ngIf="formLogin.get('passwd')?.hasError('required')"
+                                class="text-warning">
+                            Es un campo requerido
+                        </small>
+                    </div>
+    
+                    <div class="form-text">Nunca compartas tu contraseña.</div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+            </form>
+        </div>
     </div>
+    
+    <app-footer></app-footer>
 </div>

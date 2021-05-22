@@ -5,6 +5,9 @@ import { HelpService } from './shared/services/help.service';
 import { Help } from './shared/model/help.model';
 import { LoginService } from './shared/services/login.service';
 
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { Observable } from 'rxjs';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -1,16 +1,16 @@
 <div class="mt-2">
     <ul class="nav nav-pills justify-content-center">
         <li class="nav-item">
-            <button class="nav-link active" data-bs-toggle="pill" type="button" aria-selected="true" routerLink="home">Ayudas</button>
+            <button class="nav-link nav-item-custom" type="button" [routerLink]="['/','home']">Ayudas</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" type="button" aria-selected="false" routerLink="community">Comunidad</button>
+            <button class="nav-link nav-item-custom" type="button" [routerLink]="['/','community']">Comunidad</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" type="button" aria-selected="false" routerLink="profile">Perfil</button>
+            <button class="nav-link nav-item-custom" type="button" [routerLink]="['/','profile']">Perfil</button>
         </li>
         <li class="nav-item">
-            <button class="nav-link" data-bs-toggle="pill" type="button" aria-selected="false" type="button" routerLink="about">Creado por</button>
+            <button class="nav-link nav-item-custom" type="button" [routerLink]="['/','about']">Creado por</button>
         </li>
     </ul>
 </div>

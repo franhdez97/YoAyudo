@@ -19,8 +19,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loginServ.getLocalStorage();
-    
     if(this.loginServ.SESSION?.id) {
       this.helpServ.getHelp(this.loginServ.SESSION?.id).subscribe(
         value => {

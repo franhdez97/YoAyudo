@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Person } from 'src/app/shared/model/person.model';
-import { LoginService } from 'src/app/shared/services/login.service';
-import { ProfileService } from 'src/app/shared/services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,9 +7,7 @@ import { ProfileService } from 'src/app/shared/services/profile.service';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(
-    public loginServ: LoginService
-  ) {
+  constructor() {
     
   }
 

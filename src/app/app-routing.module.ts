@@ -7,31 +7,39 @@ import { ListComponent } from './components/community/list/list.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { SessionGuard } from './shared/guards/session.guard';
+import { LoginGuard } from './shared/guards/login.guard';
 
 const routes: Routes = [
   {
     path: '',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
+    canActivate: [LoginGuard]
   },
   {
     path: 'home',
-    component: HomeComponent
+    component: HomeComponent,
+    canActivate: [SessionGuard]
   },
   {
     path: 'community',
-    component: ListComponent
+    component: ListComponent,
+    canActivate: [SessionGuard]
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [SessionGuard]
   },
   {
     path: 'about',
-    component: AboutComponent
+    component: AboutComponent,
+    canActivate: [SessionGuard]
   },
   {
     path: '404',

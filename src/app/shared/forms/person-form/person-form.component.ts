@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Person } from '../../model/person.model';
 import { LoginService } from '../../services/login.service';
 import { ProfileService } from '../../services/profile.service';
@@ -19,11 +19,13 @@ export class PersonFormComponent implements OnInit {
     private profileServ: ProfileService
   ) {
     this.formPersona = new FormGroup({
-      categoria: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required]),
-      lugar: new FormControl('', [Validators.required]),
+      nombre: new FormControl('', [Validators.required]),
+      apellido: new FormControl('', [Validators.required]),
+      fecha_nac: new FormControl('', [Validators.required]),
       foto: new FormControl('', []),
-      importancia: new FormControl('', [Validators.required])
+      genero: new FormControl('', [Validators.required]),
+      depsv: new FormControl('', [Validators.required]),
+      munsv: new FormControl('', [Validators.required])
     });
   }
 
@@ -43,6 +45,8 @@ export class PersonFormComponent implements OnInit {
 
   public sendForm(event: Event) {
     event.preventDefault();
+
+    console.log('Funca xd');
   }
 
 }

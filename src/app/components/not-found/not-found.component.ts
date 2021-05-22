@@ -8,10 +8,9 @@ import { LoginService } from 'src/app/shared/services/login.service';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor(public loginServ: LoginService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.loginServ.getLocalStorage();
   }
 
 }

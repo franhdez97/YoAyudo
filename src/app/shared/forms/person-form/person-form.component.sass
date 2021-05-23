@@ -5,6 +5,8 @@ img
     border: .1rem white solid
     margin: 1rem
     cursor: pointer
+    object-fit: cover
+    max-width: 100%
 
 input[type="radio"]
     cursor: pointer
@@ -28,13 +30,16 @@ input[type="radio"]
     flex-direction: column
     align-items: center
     justify-content: center
-    border-bottom: .2rem white solid
 
 .form__img__flex
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
+
+.divider-horizontal
+    background-color: white
+    padding: .1rem
 
 @media (min-width: 1200px)
     .form__grid

@@ -39,8 +39,11 @@ export class LoginComponent implements OnInit {
       this.loginServ.login(user).subscribe(
         result => {
           if(result?.id) {
-            this.loginServ.SESSION = result;
-            this.loginServ.getUser();
+            this.loginServ.SESSION.u_token = result.id;
+            this.loginServ.SESSION.p_token = result.persona_id;
+            this.loginServ.SESSION.access = result.rol;
+            this.loginServ.SESSION.user = result.username;
+            this.loginServ.SESSION.m_token = result.municipio_id;
             this.router.navigate(['/', 'home']);
           }
           else {

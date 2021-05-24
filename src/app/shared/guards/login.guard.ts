@@ -17,11 +17,11 @@ export class LoginGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       this.loginServ.getLocalStorage();
-      if(this.loginServ.SESSION?.id) {
+      if(this.loginServ.SESSION?.u_token) {
         this.route.navigate(['/', 'home']);
       }
       
-      return !this.loginServ.SESSION?.id ? true : false;
+      return !this.loginServ.SESSION?.u_token ? true : false;
   }
   
 }

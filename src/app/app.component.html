@@ -4,7 +4,7 @@
 
 <!-- Comienzo Modal Reporte // antes => data-bs-scroll="true" data-bs-backdrop="false"-->
 <div class="offcanvas offcanvas-start" tabindex="-1"
-id="reportCanvas" *ngIf="this.loginServ.SESSION?.rol == 1">
+id="reportCanvas" *ngIf="this.loginServ.SESSION?.access == 1">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title">Formulario de ayuda</h5>
         <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -16,7 +16,7 @@ id="reportCanvas" *ngIf="this.loginServ.SESSION?.rol == 1">
         <form class="form" [formGroup]="form" (ngSubmit)="sendForm($event)">
             <div class="my-2">
                 <div class="form-label">Categoria</div>
-                <select class="form-control" formControlName="categoria">
+                <select class="form-select" formControlName="categoria">
                     <option value="">Seleccione</option>
                     <option value="1">Accidente de auto</option>
                     <option value="2">Robo</option>

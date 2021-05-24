@@ -1,0 +1,43 @@
+<app-header></app-header>
+
+<div class="container">
+    <!-- Comienzo Container -->
+
+    <div class="row">
+        <div class="title-empty" *ngIf="listHelp.length == 0">
+            <h3 class="text-white text-center my-4 bg-danger b-radius">No hay reportes por ahora</h3>
+        </div>
+
+        <app-items-home class="col-sm-12 col-md-6 my-1" *ngFor="let item of listHelp" [help]="item" (delete)="deleteItem($event)" (detail)="showItem($event)"></app-items-home>
+    </div>
+
+    <!-- Comienzo Modal detalle -->
+    <div class="modal fade" id="helpModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Detalles</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <h2 class="text-center">Ubicación</h2>
+                        <h4 class="modal-ubication" #ubicationModal>
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime, nobis.
+                        </h4>
+                    </div>
+                    <div class="row">
+                        <img src="../../../assets/img/test.jpg" alt="Imagen de referencia" #photoModal>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cierre Modal detalle -->
+
+</div> <!-- Cierre del container -->
+
+<app-footer></app-footer>

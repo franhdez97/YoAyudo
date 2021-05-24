@@ -1,0 +1,37 @@
+<div class="card" id="card__help__{{help.id}}">
+    <div class="card-body">
+        <div class="flex-card-title">
+            <h5 class="card-title">
+                {{
+                    help.categoria == 1 ? 'ACCIDENTE DE AUTO' : help.categoria == 2 ?
+                    'ROBO' : help.categoria == 3 ?
+                    'VECINOS RUIDOSOS' : 'VIOLENCIA FISICA'
+                }}
+            </h5>
+            <div>
+                <div class="card-importance {{ help.importancia ? 'bg-danger' : 'bg-success' }}"></div>
+            </div>
+        </div>
+        <p class="card-text">
+            {{ help.descripcion }}
+        </p>
+        <div class="flex-button-options">
+            <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()"
+            *ngIf="this.loginServ.SESSION?.access == 0">
+                <span class="material-icons">send</span>&nbsp;Responder
+            </button>
+            <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()"
+            *ngIf="this.loginServ.SESSION?.access == 0">
+                <span class="material-icons">thumb_down</span>&nbsp;Ignorar
+            </button>
+            <p class="bg-dark mx-2 p-2"
+            *ngIf="this.loginServ.SESSION?.access == 1">
+                Estado: {{help.estado == 0 ? 'Pendiente': help.estado == 1 ? 'Respondida' : 'Rechazada'}}
+            </p>
+            <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal"
+                data-bs-target="#helpModal" (click)="showHelp()">
+                <span class="material-icons">info</span>&nbsp;Ver más
+            </button>
+        </div>
+    </div>
+</div>

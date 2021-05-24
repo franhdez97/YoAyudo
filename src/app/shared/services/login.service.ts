@@ -4,21 +4,24 @@ import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 import { User } from '../model/user.model';
 import notie from 'notie';
+import { Session } from '../model/session.model';
+import { Municipio } from '../model/municipio.model';
+import { Person } from '../model/person.model';
 
-const USER_LOCAL = 'YoAyudo_SESSION';
+const SESSION_LOCAL = 'SESSION_TOKEN';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
 
-  public SESSION: User = new User();
+  public SESSION: Session = new Session();
 
   // Metodos extra
   clearStorage = () => {
     try {
       localStorage.clear();
-      this.SESSION = new User();
+      this.SESSION = new Session();
       this.router.navigate(['/']);
     } catch (error) {
         console.log(error);
@@ -34,14 +37,19 @@ export class LoginService {
   }
 
   public getUser(): void {
-    this.http.get<User>(`${environment.URL}/user/${this.SESSION?.id ? this.SESSION.id : -1}`).subscribe(
+    this.http.get<User>(`${environment.URL}/user/${this.SESSION?.u_token ? this.SESSION.u_token : -1}`).subscribe(
       result => {
-        if(result?.id) {
-          this.SESSION = result;
-          this.addLocalStorage(result);
+        if(result?.id && result?.id != -1) {
+          this.SESSION.u_token = result.id || -1;
+          this.SESSION.p_token = result.persona_id;
+          this.SESSION.access = result.rol;
+          this.SESSION.user = result.username;
+          this.SESSION.m_token = result.municipio_id;
+          
+          this.addLocalStorage(this.SESSION);
         }
         else {
-          this.SESSION = new User();
+          this.SESSION = new Session();
           this.addLocalStorage(this.SESSION);
         }
       }
@@ -58,20 +66,20 @@ export class LoginService {
   }
 
   // Local Storage
-  private addLocalStorage(user: User) {
-    localStorage.setItem(USER_LOCAL, JSON.stringify(user));
+  private addLocalStorage(session: Session) {
+    localStorage.setItem(SESSION_LOCAL, JSON.stringify(session));
   }
   public getLocalStorage() {
     try {
-      this.SESSION = JSON.parse(localStorage.getItem(USER_LOCAL) || '{}');
+      this.SESSION = JSON.parse(localStorage.getItem(SESSION_LOCAL) || '{}');
     } catch (error) {
       console.log(error);
     }
   }
   private initLocalStorage() {
-    this.SESSION = JSON.parse(localStorage.getItem(USER_LOCAL) || '{}');
+    this.SESSION = JSON.parse(localStorage.getItem(SESSION_LOCAL) || '{}');
     if(!this.SESSION) {
-      localStorage.setItem(USER_LOCAL, JSON.stringify(new User()));
+      localStorage.setItem(SESSION_LOCAL, JSON.stringify(new Session()));
     }
     this.getLocalStorage();
   }

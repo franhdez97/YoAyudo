@@ -10,10 +10,10 @@ export class HelpService {
 
   constructor(private http: HttpClient) { }
 
-  public getHelp(rol: number) {
-    return this.http.get<Help[]>(`${environment.URL}/help/${rol}`);
+  public getHelp(help: any) {
+    return this.http.post<Help[]>(`${environment.URL}/help/getHelps`, help);
   }
   public addReport(help: Help) {
-    this.http.post(`${environment.URL}/help`, help);
+    return this.http.post(`${environment.URL}/help`, help);
   }
 }

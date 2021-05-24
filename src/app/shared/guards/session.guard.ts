@@ -18,9 +18,9 @@ export class SessionGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     let result = false;
     
-    if(this.loginServ.SESSION?.id) {
+    if(this.loginServ.SESSION?.u_token) {
       this.loginServ.getUser();
-      result = this.loginServ.SESSION?.id ? true : false;
+      result = this.loginServ.SESSION?.u_token ? true : false;
     }
     
     return result;

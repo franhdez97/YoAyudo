@@ -24,7 +24,4 @@ export class ProfileService {
   updateUser(form: FormGroup) {
     return this.http.put(`${environment.URL}/user/`, form);
   }
-  addUser(form: FormGroup) {
-    return this.http.post(`${environment.URL}/user/`, form);
-  }
 }

@@ -1,7 +1,6 @@
 <form [formGroup]="formPerson" (ngSubmit)="sendFormPerson($event)">
     <div class="form__img mb-4">
-        <!-- person?.foto ? person.foto : URL_PREVIEW -->
-        <img [src]="person?.foto ? person.foto : URL_PREVIEW" alt="Foto de perfil" width="256" height="256" class="preview-image">
+        <img [src]="URL_PREVIEW" alt="Foto de perfil" width="256" height="256" class="preview-image">
         <div class="form__img__flex">
             <span class="mb-2">Usa una imagen de tamaño cuadrada</span>
             <input type="file" class="form-control" formControlName="foto" (change)="previewPhoto($event)" accept="image/*">
@@ -66,7 +65,7 @@
         </div>
     </div>
 
-    <div class="text-center my-4" *ngIf="loginServ.SESSION?.id != -1 && loginServ.SESSION?.id != undefined">
+    <div class="text-center my-4" *ngIf="loginServ.SESSION?.u_token != -1 && loginServ.SESSION?.u_token != undefined">
         <button type="submit" class="btn btn-primary w-50" [disabled]="formPerson.invalid">Guardar</button>
     </div>
 </form>

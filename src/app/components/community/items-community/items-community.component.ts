@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Report } from 'src/app/shared/model/report.model';
 
 @Component({
   selector: 'app-item-community',
@@ -7,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ItemsCommunityComponent implements OnInit {
 
-  @Input() item: number = -1;
+  @Input() item: Report = new Report({});
 
   constructor() { }
 

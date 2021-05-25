@@ -43,14 +43,13 @@ export class LoginService {
           this.SESSION.u_token = result.id || -1;
           this.SESSION.p_token = result.persona_id;
           this.SESSION.access = result.rol;
-          this.SESSION.user = result.username;
           this.SESSION.m_token = result.municipio_id;
           
           this.addLocalStorage(this.SESSION);
         }
         else {
           this.SESSION = new Session();
-          this.addLocalStorage(this.SESSION);
+          localStorage.clear();
         }
       }
     );

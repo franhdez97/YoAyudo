@@ -1,5 +1,20 @@
 @use '../../../../assets/sass/colors'
     
+#card__help
+    height: 100%
+
+.card-title-custom
+    padding: .5rem 1rem 0 1rem
+.card-title-custom__importance
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+.card-body
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+
 .flex-button
     display: flex
     align-items: center
@@ -8,7 +23,6 @@
     display: flex
     justify-content: space-between
     border-bottom: .1rem white solid
-    margin-bottom: 1rem
 .card-importance
     padding: .5rem
     border-radius: 100%
@@ -17,6 +31,15 @@
 .flex-button-options
     display: flex
     flex-direction: column
+.text-bold
+    font-weight: bold
+    text-transform: uppercase
+.card-text__response
+    background: colors.$primary
+    color: white
+    font-weight: bold
+    border-radius: 1rem
+    padding: .5rem 1rem
 
 @media (min-width:  768px)
     .flex-button-options

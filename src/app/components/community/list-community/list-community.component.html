@@ -5,15 +5,70 @@
     <div class="sidebar-left">
         <div class="container border-posts">
             <blockquote class="text-center">
-                Esta viendo reportes en <br><b>{{ 'San Vicente' | uppercase}}</b>
+                <b>Esta viendo reportes locales en su municipio</b>
             </blockquote>
+
+            <div class="divider"></div>
+
+            <p>
+                Si desea reportar algo a la comunidad, llene el formulario.
+                <br><br>
+                (Estos reportes son publicos, se eliminaran las posibles publicaciones engañosas)
+            </p>
+
+            <form class="form" [formGroup]="formReport" (ngSubmit)="sendForm($event)">
+                <div class="my-2">
+                    <div class="form-label">Titulo del reporte</div>
+                    <input class="form-control"
+                        placeholder="Drenaje de agua" formControlName="titulo"/>
+    
+                    <div *ngIf="formReport.get('titulo')?.errors && formReport.get('titulo')?.touched">
+                        <small *ngIf="formReport.get('titulo')?.hasError('required')" class="text-warning">
+                            Es un campo requerido
+                        </small>
+                    </div>
+                </div>
+                <div class="mb-2">
+                    <div class="form-label">Referencia del lugar</div>
+                    <textarea class="form-control"
+                        placeholder="En el mercado municipal 4 cuadras abajo del hospital"
+                        rows="2" formControlName="lugar"></textarea>
+    
+                    <div *ngIf="formReport.get('lugar')?.errors && formReport.get('lugar')?.touched">
+                        <small *ngIf="formReport.get('lugar')?.hasError('required')" class="text-warning">
+                            Es un campo requerido
+                        </small>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <div class="form-label">Descripción</div>
+                    <textarea class="form-control" placeholder="No se puede pasar por esta calle, hay demasiada agua que impide que el trafico avance"
+                    rows="5" formControlName="descripcion"></textarea>
+    
+                    <div *ngIf="formReport.get('descripcion')?.errors && formReport.get('descripcion')?.touched">
+                        <small *ngIf="formReport.get('descripcion')?.hasError('required')"
+                                class="text-warning">
+                            Es un campo requerido
+                        </small>
+                        <small *ngIf="formReport.get('descripcion')?.hasError('maxlength')"
+                                class="text-warning">
+                            Su descripción es muy extensa
+                        </small>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="formReport.invalid">Enviar</button>
+                <button type="reset" class="btn btn-secondary">Cancelar</button>
+            </form>
         </div>
     </div>
     <!-- Sidebar right -->
     <div class="sidebar-right">
         <div class="container border-posts">
             <div class="accordion" id="accordionListPost">
-                <app-item-community *ngFor="let x of [1,2,3,4,5,6,7,8,9,10,11,12]; let i = index" [item]="i">
+                <h4 class="text-center text-uppercase" *ngIf="listCommunity.length === 0">
+                    No hay publicaciones por ahora
+                </h4>
+                <app-item-community *ngFor="let x of listCommunity" [item]="x">
                 </app-item-community>
             </div>
         </div>

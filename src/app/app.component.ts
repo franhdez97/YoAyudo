@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   ) {
     this.form = new FormGroup({
       categoria: new FormControl('', [Validators.required]),
-      descripcion: new FormControl('', [Validators.required]),
+      descripcion: new FormControl('', [Validators.required, Validators.maxLength(250)]),
       lugar: new FormControl('', [Validators.required]),
       foto: new FormControl('', []),
       importancia: new FormControl('', [Validators.required])

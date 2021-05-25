@@ -41,6 +41,10 @@ id="reportCanvas" *ngIf="this.loginServ.SESSION?.access == 1">
                             class="text-warning">
                         Es un campo requerido
                     </small>
+                    <small *ngIf="form.get('descripcion')?.hasError('maxlength')"
+                            class="text-warning">
+                        Su descripción es muy extensa
+                    </small>
                 </div>
             </div>
             <div class="mb-2">

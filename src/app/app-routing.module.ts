@@ -7,7 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { SessionGuard } from './shared/guards/session.guard';
 import { LoginGuard } from './shared/guards/login.guard';
-import { ListHomeComponent } from './components/home/list/list-home.component';
+import { ListHomeComponent } from './components/home/list-home/list-home.component';
 import { ListCommunityComponent } from './components/community/list-community/list-community.component';
 
 const routes: Routes = [

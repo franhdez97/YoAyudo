@@ -16,4 +16,7 @@ export class HelpService {
   public addReport(help: Help) {
     return this.http.post(`${environment.URL}/help`, help);
   }
+  public updateState(help) {
+    return this.http.put(`${environment.URL}/help/updateState`, help);
+  }
 }

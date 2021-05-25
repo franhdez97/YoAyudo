@@ -7,7 +7,7 @@ import { HeaderComponent } from './shared/header/header.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ListHomeComponent } from './components/home/list/list-home.component';
+import { ListHomeComponent } from './components/home/list-home/list-home.component';
 import { AboutComponent } from './components/about/about.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';

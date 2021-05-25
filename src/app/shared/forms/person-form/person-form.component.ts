@@ -2,7 +2,6 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Municipio } from '../../model/municipio.model';
 import { Person } from '../../model/person.model';
-import { User } from '../../model/user.model';
 import { LoginService } from '../../services/login.service';
 import { MunicipioService } from '../../services/municipio.service';
 import { ProfileService } from '../../services/profile.service';
@@ -19,7 +18,7 @@ export class PersonFormComponent implements OnInit {
   public URL_PREVIEW: any = "../../../assets/img/user.svg";
 
   person: Person = new Person();
-  user: User = new User();
+  user: string = '';
   depsv_id: number = -1;
 
   formPerson: FormGroup;
@@ -58,6 +57,7 @@ export class PersonFormComponent implements OnInit {
           this.URL_PREVIEW = data.foto ? data.foto : this.URL_PREVIEW;
           this.depsv_id = data?.depsv_id;
           this.person = data;
+          this.user = data?.username;
 
           // Cargar municipios
           this.municipios(this.depsv_id);
@@ -91,7 +91,7 @@ export class PersonFormComponent implements OnInit {
     });
 
     this.formUser = new FormGroup({
-      username: new FormControl(this.loginServ.SESSION.user, [Validators.required]),
+      username: new FormControl(this.user, [Validators.required]),
       passwd: new FormControl('', [Validators.required, Validators.minLength(6)]),
       re_passwd: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
@@ -138,7 +138,7 @@ export class PersonFormComponent implements OnInit {
       // Verificar si aun esta permitido tener transacciones al server.
       this.loginServ.getUser();
 
-      if(this.loginServ.SESSION?.u_token && this.loginServ.SESSION?.u_token != undefined) {
+      if(this.loginServ.SESSION?.u_token && this.loginServ.SESSION?.u_token != -1) {
         this.formUser.value.id = this.loginServ.SESSION?.u_token; // Para asignar el valor del id a actualizar
         
         this.profileServ.updateUser(this.formUser.value).subscribe(
@@ -168,8 +168,13 @@ export class PersonFormComponent implements OnInit {
 
           this.profileServ.addPerson(form).subscribe(
             result => {
-              notie.alert({ 'type': 'success', 'text': 'Usuario creado'});
-              this.router.navigate(['']);
+              if(result.toString() === "EXISTS") {
+                notie.alert({ 'type': 'warning', 'text': 'El usuario ya existe'});
+              }
+              else {
+                notie.alert({ 'type': 'success', 'text': 'Usuario creado'});
+                this.router.navigate(['']);
+              }
             },
             error => {
               notie.alert({ 'type': 'error', 'text': 'Lo sentimos, no pudimos contactar con el servidor'});

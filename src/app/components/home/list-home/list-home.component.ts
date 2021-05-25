@@ -30,12 +30,10 @@ export class ListHomeComponent implements OnInit {
     // Si el rol es 1 (cliente), cargara las alertas asociadas a ese usuario.
 
     if(this.loginServ.SESSION?.u_token && this.loginServ.SESSION?.u_token != undefined) {
-      const helpObj = {
-        role: this.loginServ.SESSION?.access,
-        u_token: this.loginServ.SESSION?.u_token
-      };
-
-      this.helpServ.getHelp(helpObj).subscribe(
+      this.helpServ.getHelp({
+          role: this.loginServ.SESSION?.access,
+          u_token: this.loginServ.SESSION?.u_token
+      }).subscribe(
         value => {
           this.listHelp = value;
         },

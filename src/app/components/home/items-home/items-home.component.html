@@ -1,5 +1,5 @@
-<div class="card" id="card__help__{{help.id}}">
-    <div class="card-body">
+<div class="card" id="card__help">
+    <div class="card-title-custom">
         <div class="flex-card-title">
             <h5 class="card-title">
                 {{
@@ -8,30 +8,45 @@
                     'VECINOS RUIDOSOS' : 'VIOLENCIA FISICA'
                 }}
             </h5>
-            <div>
+            <div class="card-title-custom__importance">
                 <div class="card-importance {{ help.importancia ? 'bg-danger' : 'bg-success' }}"></div>
             </div>
         </div>
-        <p class="card-text">
-            {{ help.descripcion }}
-        </p>
-        <div class="flex-button-options">
-            <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()"
-            *ngIf="this.loginServ.SESSION?.access == 0">
-                <span class="material-icons">send</span>&nbsp;Responder
-            </button>
-            <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()"
-            *ngIf="this.loginServ.SESSION?.access == 0">
-                <span class="material-icons">thumb_down</span>&nbsp;Ignorar
-            </button>
-            <p class="bg-dark mx-2 p-2"
-            *ngIf="this.loginServ.SESSION?.access == 1">
-                Estado: {{help.estado == 0 ? 'Pendiente': help.estado == 1 ? 'Respondida' : 'Rechazada'}}
+    </div>
+    <div class="card-body">
+        <div class="card-text">
+            <p>
+                {{ help.descripcion }}
             </p>
-            <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal"
-                data-bs-target="#helpModal" (click)="showHelp()">
-                <span class="material-icons">info</span>&nbsp;Ver más
-            </button>
+            <p *ngIf="help.estado === 1" class="card-text__response">
+                Respuesta:
+                <br>
+                "{{ help.respuesta }}"
+            </p>
+            <!-- class="text-end" -->
+            <p>
+                Fecha: {{ help.fecha_hora | date:'dd/MM/yyyy, hh:mm a'}}
+            </p>
+        </div>
+        <div class="card-body__container">
+            <div class="flex-button-options">
+                <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()"
+                *ngIf="this.loginServ.SESSION?.access == 0">
+                    <span class="material-icons">send</span>&nbsp;Responder
+                </button>
+                <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()"
+                *ngIf="this.loginServ.SESSION?.access == 0">
+                    <span class="material-icons">thumb_down</span>&nbsp;Ignorar
+                </button>
+                <div class="bg-dark p-2"
+                *ngIf="this.loginServ.SESSION?.access == 1">
+                    Estado: <span class="text-bold">{{help.estado == 0 ? 'Pendiente': help.estado == 1 ? 'Respondida' : 'Rechazada'}}</span>
+                </div>
+                <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal"
+                    data-bs-target="#helpModal" (click)="showHelp()">
+                    <span class="material-icons">info</span>&nbsp;Ver más
+                </button>
+            </div>
         </div>
     </div>
 </div>

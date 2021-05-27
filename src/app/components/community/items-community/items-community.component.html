@@ -2,13 +2,15 @@
     <h2 class="accordion-header" id="heading{{item.id}}">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
             attr.data-bs-target="#collapse{{item.id}}" aria-expanded="false" attr.aria-controls="collapse{{item.id}}">
-            {{item.lugar}}
+            {{item.titulo}}
         </button>
     </h2>
     <div id="collapse{{item.id}}" class="accordion-collapse collapse" attr.aria-labelledby="heading{{item}}"
         data-bs-parent="#accordionListPost">
         <div class="accordion-body">
             {{item.descripcion}}
+            <br>
+            <strong>({{item.lugar}})</strong>
         </div>
     </div>
 </div>

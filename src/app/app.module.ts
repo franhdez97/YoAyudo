@@ -21,6 +21,8 @@ import { ItemsHomeComponent } from './components/home/items-home/items-home.comp
 import { ItemsCommunityComponent } from './components/community/items-community/items-community.component';
 import { ListCommunityComponent } from './components/community/list-community/list-community.component';
 
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +46,8 @@ import { ListCommunityComponent } from './components/community/list-community/li
     ReactiveFormsModule,
     FormsModule,
     SpinnerModule,
-    PersonFormModule // Para usarlo en el registro y perfil
+    PersonFormModule,
+    NgxPaginationModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: SpinnerInterceptor, multi: true }

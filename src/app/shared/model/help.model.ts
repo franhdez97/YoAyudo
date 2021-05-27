@@ -4,7 +4,7 @@ export class Help {
     fecha_hora: Date;
     lugar: string;
     estado: number;
-    foto: string;
+    foto: any;
     respuesta: string;
     usuario_id: number;
     municipio_id: number;

@@ -10,6 +10,8 @@ import { LoginService } from 'src/app/shared/services/login.service';
 })
 export class ListHomeComponent implements OnInit {
   public listHelp: Help[] = [];
+  
+  public page: number = 1;
 
   @ViewChild("ubicationModal") ubicationModal!: ElementRef;
   @ViewChild("photoModal") photoModal!: ElementRef;

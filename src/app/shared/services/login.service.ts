@@ -5,8 +5,6 @@ import { environment } from '../../../environments/environment';
 import { User } from '../model/user.model';
 import notie from 'notie';
 import { Session } from '../model/session.model';
-import { Municipio } from '../model/municipio.model';
-import { Person } from '../model/person.model';
 
 const SESSION_LOCAL = 'SESSION_TOKEN';
 

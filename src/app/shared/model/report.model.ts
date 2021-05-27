@@ -5,6 +5,7 @@ export class Report {
     fecha_hora: Date;
     usuario_id: number;
     municipio_id: number;
+    titulo: string;
 
     constructor(report) {
         this.id = report?.id;
@@ -13,5 +14,6 @@ export class Report {
         this.fecha_hora = report?.fecha_hora;
         this.usuario_id = report?.usuario_id;
         this.municipio_id = report?.municipio_id;
+        this.titulo = report?.titulo;
     }
 }

@@ -16,12 +16,11 @@
                 (Estos reportes son publicos, se eliminaran las posibles publicaciones engañosas)
             </p>
 
-            <form class="form" [formGroup]="formReport" (ngSubmit)="sendForm($event)">
+            <form class="form" [formGroup]="formReport" (ngSubmit)="sendForm($event)" enctype="multipart/form-data">
                 <div class="my-2">
                     <div class="form-label">Titulo del reporte</div>
-                    <input class="form-control"
-                        placeholder="Drenaje de agua" formControlName="titulo"/>
-    
+                    <input class="form-control" placeholder="Drenaje de agua" formControlName="titulo" />
+
                     <div *ngIf="formReport.get('titulo')?.errors && formReport.get('titulo')?.touched">
                         <small *ngIf="formReport.get('titulo')?.hasError('required')" class="text-warning">
                             Es un campo requerido
@@ -30,10 +29,9 @@
                 </div>
                 <div class="mb-2">
                     <div class="form-label">Referencia del lugar</div>
-                    <textarea class="form-control"
-                        placeholder="En el mercado municipal 4 cuadras abajo del hospital"
+                    <textarea class="form-control" placeholder="En el mercado municipal 4 cuadras abajo del hospital"
                         rows="2" formControlName="lugar"></textarea>
-    
+
                     <div *ngIf="formReport.get('lugar')?.errors && formReport.get('lugar')?.touched">
                         <small *ngIf="formReport.get('lugar')?.hasError('required')" class="text-warning">
                             Es un campo requerido
@@ -42,16 +40,15 @@
                 </div>
                 <div class="mb-4">
                     <div class="form-label">Descripción</div>
-                    <textarea class="form-control" placeholder="No se puede pasar por esta calle, hay demasiada agua que impide que el trafico avance"
-                    rows="5" formControlName="descripcion"></textarea>
-    
+                    <textarea class="form-control"
+                        placeholder="No se puede pasar por esta calle, hay demasiada agua que impide que el trafico avance"
+                        rows="5" formControlName="descripcion"></textarea>
+
                     <div *ngIf="formReport.get('descripcion')?.errors && formReport.get('descripcion')?.touched">
-                        <small *ngIf="formReport.get('descripcion')?.hasError('required')"
-                                class="text-warning">
+                        <small *ngIf="formReport.get('descripcion')?.hasError('required')" class="text-warning">
                             Es un campo requerido
                         </small>
-                        <small *ngIf="formReport.get('descripcion')?.hasError('maxlength')"
-                                class="text-warning">
+                        <small *ngIf="formReport.get('descripcion')?.hasError('maxlength')" class="text-warning">
                             Su descripción es muy extensa
                         </small>
                     </div>
@@ -68,8 +65,16 @@
                 <h4 class="text-center text-uppercase" *ngIf="listCommunity.length === 0">
                     No hay publicaciones por ahora
                 </h4>
-                <app-item-community *ngFor="let x of listCommunity" [item]="x">
+                <app-item-community *ngFor="let x of listCommunity | paginate: { itemsPerPage: 10, currentPage: page, totalItems: listCommunity.length }" [item]="x">
                 </app-item-community>
+                <div class="text-center my-4" *ngIf="listCommunity.length > 0">
+                    <pagination-controls
+                        (pageChange)="page = $event"
+                        [directionLinks]="true"
+                        [responsive]="true"
+                        previousLabel="Anterior"
+                        nextLabel="Siguiente"></pagination-controls>
+                </div>
             </div>
         </div>
     </div>

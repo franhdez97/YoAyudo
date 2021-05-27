@@ -13,6 +13,9 @@ export class HelpService {
   public getHelp(help: any) {
     return this.http.post<Help[]>(`${environment.URL}/help/getHelps`, help);
   }
+  public addPhotoHelp(file: FormData) {
+    return this.http.post(`${environment.URL}/help/addPhoto`, file);
+  }
   public addReport(help: Help) {
     return this.http.post(`${environment.URL}/help`, help);
   }

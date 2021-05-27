@@ -13,7 +13,7 @@ id="reportCanvas" *ngIf="this.loginServ.SESSION?.access == 1">
         <div>
             <label class="form-label">Por favor, completa todos los campos.</label>
         </div>
-        <form class="form" [formGroup]="form" (ngSubmit)="sendForm($event)">
+        <form class="form" [formGroup]="form" (ngSubmit)="sendForm($event)" method="POST" enctype="multipart/form-data">
             <div class="my-2">
                 <div class="form-label">Categoria</div>
                 <select class="form-select" formControlName="categoria">
@@ -61,7 +61,8 @@ id="reportCanvas" *ngIf="this.loginServ.SESSION?.access == 1">
             </div>
             <div class="mb-3">
                 <div class="form-label">Foto del accidente (Opcional)</div>
-                <input class="form-control" type="file" accept="image/*" formControlName="foto">
+                <input class="form-control" type="file"
+                accept="image/*" formControlName="foto" (change)="onFileChange($event)">
             </div>
             <div class="mb-2">
                 <div class="form-label">Gravedad</div>

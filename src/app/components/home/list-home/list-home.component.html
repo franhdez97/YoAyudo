@@ -8,7 +8,15 @@
             <h3 class="text-white text-center my-4 bg-danger b-radius">No hay reportes por ahora</h3>
         </div>
 
-        <app-items-home class="col-sm-12 col-md-6 my-1" *ngFor="let item of listHelp" [help]="item" (delete)="deleteItem($event)" (detail)="showItem($event)"></app-items-home>
+        <app-items-home class="col-sm-12 col-md-6 my-1" *ngFor="let item of listHelp | paginate: { itemsPerPage: 6, currentPage: page, totalItems: listHelp.length }" [help]="item" (delete)="deleteItem($event)" (detail)="showItem($event)"></app-items-home>
+        <div class="text-center my-4" *ngIf="listHelp.length > 0">
+            <pagination-controls
+                (pageChange)="page = $event"
+                [directionLinks]="true"
+                [responsive]="true"
+                previousLabel="Anterior"
+                nextLabel="Siguiente"></pagination-controls>
+        </div>
     </div>
 
     <!-- Comienzo Modal detalle -->

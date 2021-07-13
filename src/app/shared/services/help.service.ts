@@ -16,7 +16,7 @@ export class HelpService {
   public addPhotoHelp(file: FormData) {
     return this.http.post(`${environment.URL}/help/addPhoto`, file);
   }
-  public addReport(help: Help) {
+  public addReport(help: FormData) {
     return this.http.post(`${environment.URL}/help`, help);
   }
   public updateState(help) {

@@ -48,6 +48,6 @@ export class ListHomeComponent implements OnInit {
 
   showItem(help: Help) {
     this.renderer.setProperty(this.ubicationModal.nativeElement, "innerHTML", help.lugar);
-    this.renderer.setProperty(this.photoModal.nativeElement, "src", help.foto);
+    this.renderer.setProperty(this.photoModal.nativeElement, "src", `http://192.168.1.4:3000/image/help/${help.foto}`);
   }
 }

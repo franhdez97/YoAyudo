@@ -57,30 +57,28 @@ export class AppComponent implements OnInit {
       help.municipio_id = this.loginServ.SESSION.m_token;
 
       // Para la foto
-      const formFoto = new FormData();//Crea un formulario
-      console.log(this.file.name.replaceAll(/ /g,''));
-      formFoto.append('foto',this.file,this.file.name.replaceAll(/ /g,'_'));//Asigna el campo File
+      const formHelp = new FormData();//Crea un formulario
+      formHelp.append(
+        'help_photo',
+        this.file ? this.file : "",
+        this.file?.name ? this.file.name?.replaceAll(/ /g,'_') : ""
+      );//Asigna el campo "help_photo" al input file
+      formHelp.append('estado','0');
+      formHelp.append('categoria',this.form.value.categoria);
+      formHelp.append('descripcion',this.form.value.descripcion);
+      formHelp.append('lugar',this.form.value.lugar);
+      formHelp.append('importancia',this.form.value.importancia);
 
-      this.helpServ.addPhotoHelp(formFoto).subscribe(
-        resultPhoto => {
-          if (resultPhoto.toString() != "") {
-            //Internamente el envia una alerta a cada admin con este municipio
-            help.foto = resultPhoto.toString(); // Se asigna la URL
+      formHelp.append('respuesta','');
+      formHelp.append('fecha_hora',new Date().toString());
+      formHelp.append('usuario_id',this.loginServ.SESSION.u_token.toString());
+      formHelp.append('municipio_id',this.loginServ.SESSION.m_token.toString());
 
-            this.helpServ.addReport(help).subscribe(
-              resultHelp => {
-                if (resultHelp.toString() === "OK") {
-                  notie.alert({ type: 1, text: 'Reporte enviado' });
-                  this.form.reset();
-                }
-                else {
-                  notie.alert({ type: 'error', text: 'Tuvimos un problema, intente luego' });
-                }
-              },
-              error => {
-                notie.alert({ type: 'error', text: 'No pudimos conectar con el servidor' });
-              }
-            );
+      this.helpServ.addReport(formHelp).subscribe(
+        resultHelp => {
+          if (resultHelp.toString() === "OK") {
+            notie.alert({ type: 1, text: 'Reporte enviado' });
+            this.form.reset();
           }
           else {
             notie.alert({ type: 'error', text: 'Tuvimos un problema, intente luego' });

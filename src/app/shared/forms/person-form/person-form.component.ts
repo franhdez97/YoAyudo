@@ -7,6 +7,7 @@ import { MunicipioService } from '../../services/municipio.service';
 import { ProfileService } from '../../services/profile.service';
 import notie from 'notie';
 import { Router } from '@angular/router';
+import { User } from '../../model/user.model';
 
 @Component({
   selector: 'app-person-form',
@@ -16,6 +17,7 @@ import { Router } from '@angular/router';
 export class PersonFormComponent implements OnInit {
 
   public URL_PREVIEW: any = "../../../assets/img/user.svg";
+  private file;
 
   person: Person = new Person();
   user: string = '';
@@ -119,8 +121,22 @@ export class PersonFormComponent implements OnInit {
 
       if(this.loginServ.SESSION?.u_token && this.loginServ.SESSION?.u_token != undefined) {
         this.formPerson.value.id = this.loginServ.SESSION?.p_token; // Para asignar el valor del id a actualizar
+        // Para la foto
+        const formPerson = new FormData();//Crea un formulario
+        formPerson.append(
+          'foto',
+          this.file ? this.file : "",
+          this.file?.name ? this.file.name?.replaceAll(/ /g,'_') : ""
+        );//Asigna el campo "help_photo" al input file
+        formPerson.append('nombre',this.formPerson.value.nombre);
+        formPerson.append('apellido',this.formPerson.value.apellido);
+        formPerson.append('depsv',this.formPerson.value.depsv);
+        formPerson.append('fecha_nac',this.formPerson.value.fecha_nac);
+        formPerson.append('genero',this.formPerson.value.genero);
+        formPerson.append('id',this.formPerson.value.id);
+        formPerson.append('municipio_id',this.formPerson.value.municipio_id);
 
-        this.profileServ.updatePerson(this.formPerson.value).subscribe(
+        this.profileServ.updatePerson(formPerson).subscribe(
           result => {
             notie.alert({ 'type': 'success', 'text': 'Datos personales actualizados'});
           },
@@ -153,33 +169,45 @@ export class PersonFormComponent implements OnInit {
       }
       else {
         if(this.formPerson.valid && this.formUser.valid) {
-          // Aqui se unen los 2 formularios en uno solo
-          const form = {
-            nombre: this.formPerson.value.nombre,
-            apellido: this.formPerson.value.apellido,
-            genero: this.formPerson.value.genero,
-            foto: this.formPerson.value.foto,
-            fecha_nac: this.formPerson.value.fecha_nac,
-            municipio_id: this.formPerson.value.municipio_id,
-            username: this.formUser.value.username,
-            passwd: this.formUser.value.passwd,
-            rol: 1
-          };
+          // Para la foto
+          const formUser = new FormData();//Crea un formulario
+          formUser.append(
+            'foto',
+            this.file ? this.file : "",
+            this.file?.name ? this.file.name?.replaceAll(/ /g,'_') : ""
+          );//Asigna el campo "help_photo" al input file
+          formUser.append('nombre',this.formPerson.value.nombre);
+          formUser.append('apellido',this.formPerson.value.apellido);
+          formUser.append('depsv',this.formPerson.value.depsv);
+          formUser.append('fecha_nac',this.formPerson.value.fecha_nac);
+          formUser.append('genero',this.formPerson.value.genero);
+          formUser.append('municipio_id',this.formPerson.value.municipio_id);
+          formUser.append('username',this.formUser.value.username);
+          formUser.append('passwd',this.formUser.value.passwd);
+          formUser.append('rol',"1");
 
-          this.profileServ.addPerson(form).subscribe(
+          const userExists: User = new User();
+          userExists.username = this.formUser.value.username;
+
+          this.profileServ.existsUser(userExists).subscribe(
             result => {
-              if(result.toString() === "EXISTS") {
-                notie.alert({ 'type': 'warning', 'text': 'El usuario ya existe'});
+              if(result.toString() === "") {
+                this.profileServ.addPerson(formUser).subscribe(
+                  result => {
+                    notie.alert({ 'type': 'success', 'text': 'Usuario creado'});
+                    this.router.navigate(['']);
+                  },
+                  error => {
+                    notie.alert({ 'type': 'error', 'text': 'Lo sentimos, no pudimos contactar con el servidor'});
+                  }
+                );
               }
               else {
-                notie.alert({ 'type': 'success', 'text': 'Usuario creado'});
-                this.router.navigate(['']);
+                notie.alert({ 'type': 'warning', 'text': 'El usuario ya existe'});
               }
             },
-            error => {
-              notie.alert({ 'type': 'error', 'text': 'Lo sentimos, no pudimos contactar con el servidor'});
-            }
-          );
+            error => {}
+          )
         }
       }
     }
@@ -205,6 +233,7 @@ export class PersonFormComponent implements OnInit {
       }
   
       reader.readAsDataURL(event.target.files[0]);
+      this.file = event.target.files[0];
     }
   }
 

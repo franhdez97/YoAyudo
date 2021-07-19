@@ -56,7 +56,7 @@ export class PersonFormComponent implements OnInit {
     if(this.loginServ.SESSION?.p_token != undefined && this.loginServ.SESSION?.p_token !== -1) {
       this.profileServ.getPersonById(this.loginServ.SESSION?.p_token).subscribe(
         data => {
-          this.URL_PREVIEW = data.foto ? data.foto : this.URL_PREVIEW;
+          this.URL_PREVIEW = data.foto ? `http://localhost:3000/image/user/${data.foto}` : this.URL_PREVIEW;
           this.depsv_id = data?.depsv_id;
           this.person = data;
           this.user = data?.username;

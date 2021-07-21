@@ -1,9 +1,6 @@
-import { Component, ElementRef, EventEmitter, Inject, Input, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Help } from 'src/app/shared/model/help.model';
 import notie from 'notie';
-import { LoginService } from 'src/app/shared/services/login.service';
-import { DOCUMENT } from '@angular/common';
-import { HelpService } from 'src/app/shared/services/help.service';
 
 @Component({
   selector: 'app-items-home',
@@ -16,10 +13,7 @@ export class ItemsHomeComponent implements OnInit {
   @Output() delete: EventEmitter<Help> = new EventEmitter();
   @Output() detail: EventEmitter<Help> = new EventEmitter();
 
-  constructor(
-    public loginServ: LoginService,
-    private helpServ: HelpService
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
   }
@@ -34,23 +28,8 @@ export class ItemsHomeComponent implements OnInit {
       placeholder: 'Ej: Ya vamos en camino',
       submitCallback: (res) => {
         try {
-          const help = {
-            estado: 1,
-            id: this.help.id,
-            respuesta: res ? res : 'Hemos leido tu petición y ha sido tomada en cuenta'
-          };
-
-          this.helpServ.updateState(help).subscribe(
-            result => {
-              if(result.toString() === "OK") {
-                notie.alert({ type: 1, text: 'Haz respondido a esta petición'});
-                this.delete.emit(this.help);
-              }
-            },
-            error => {
-              console.log(error);
-            }
-          );
+          notie.alert({ type: 1, text: 'Haz respondido a esta petición'});
+          this.delete.emit(this.help);
         } catch (error) {
           console.log(error);
         }
@@ -64,23 +43,8 @@ export class ItemsHomeComponent implements OnInit {
       cancelText: 'Mejor no',
       submitCallback: () => {
         try {
-          const help = {
-            estado: -1,
-            id: this.help.id,
-            respuesta: 'Tu petición ha sido ignorada'
-          };
-
-          this.helpServ.updateState(help).subscribe(
-            result => {
-              if(result.toString() === "OK") {
-                notie.alert({ type: 'info', text: 'Reporte ignorado'});
-                this.delete.emit(this.help);
-              }
-            },
-            error => {
-              console.log(error);
-            }
-          );
+          notie.alert({ type: 'info', text: 'Reporte ignorado'});
+          this.delete.emit(this.help);
         } catch (error) {
           console.log(error);
         }

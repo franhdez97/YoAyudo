@@ -41,7 +41,7 @@
     <div class="form__grid mb-3">
         <span>Lugar Residencia</span>
         <div class="form__grid__flex">
-            <select class="form-select" formControlName="depsv" (ngModelChange)="municipios($event)" [class]="validateField('depsv', formPerson)">
+            <select class="form-select" formControlName="depsv" [class]="validateField('depsv', formPerson)">
                 <option value="">Departamento</option>
                 <option value="1">Ahuachapán</option>
                 <option value="2">Santa Ana</option>
@@ -65,7 +65,7 @@
         </div>
     </div>
 
-    <div class="text-center my-4" *ngIf="loginServ.SESSION?.u_token != -1 && loginServ.SESSION?.u_token != undefined">
+    <div class="text-center my-4">
         <button type="submit" class="btn btn-primary w-50" [disabled]="formPerson.invalid">Guardar</button>
     </div>
 </form>

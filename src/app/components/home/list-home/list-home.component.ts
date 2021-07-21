@@ -1,7 +1,5 @@
 import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { Help } from 'src/app/shared/model/help.model';
-import { HelpService } from 'src/app/shared/services/help.service';
-import { LoginService } from 'src/app/shared/services/login.service';
 
 @Component({
   selector: 'app-home',
@@ -17,8 +15,6 @@ export class ListHomeComponent implements OnInit {
   @ViewChild("photoModal") photoModal!: ElementRef;
 
   constructor(
-    private helpServ: HelpService,
-    private loginServ: LoginService,
     private renderer: Renderer2
   ) {
   }
@@ -28,26 +24,11 @@ export class ListHomeComponent implements OnInit {
   }
 
   ngOnInit(): void { 
-    // Si el rol es  0 (admin), cargara de la tabla mencion (para tener todas las ayudas disponibles)
-    // Si el rol es 1 (cliente), cargara las alertas asociadas a ese usuario.
-
-    if(this.loginServ.SESSION?.u_token && this.loginServ.SESSION?.u_token != undefined) {
-      this.helpServ.getHelp({
-          role: this.loginServ.SESSION?.access,
-          u_token: this.loginServ.SESSION?.u_token
-      }).subscribe(
-        value => {
-          this.listHelp = value;
-        },
-        error => {
-          console.log(error);
-        }
-      );
-    }
+    //add helps
   }
 
   showItem(help: Help) {
     this.renderer.setProperty(this.ubicationModal.nativeElement, "innerHTML", help.lugar);
-    this.renderer.setProperty(this.photoModal.nativeElement, "src", `http://192.168.1.4:3000/image/help/${help.foto}`);
+    this.renderer.setProperty(this.photoModal.nativeElement, "src", help.foto);
   }
 }

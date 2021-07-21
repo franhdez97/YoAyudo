@@ -27,6 +27,26 @@ export class ListCommunityComponent implements OnInit {
   }
 
   private getReports() {
+    this.listCommunity = [
+      {
+        id: 1,
+        descripcion: "Hay una fuga de agua en mi casa",
+        lugar: "San Vicente",
+        fecha_hora: new Date(),
+        usuario_id: 19,
+        municipio_id: 257,
+        titulo: "Inundación"
+      },
+      {
+        id: 2,
+        descripcion: "Alguien choco con los vecinos",
+        lugar: "San Salvador",
+        fecha_hora: new Date(),
+        usuario_id: 19,
+        municipio_id: 257,
+        titulo: "Choque de autos"
+      }
+    ];
   }
 
   public sendForm(event: Event) {

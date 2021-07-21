@@ -25,6 +25,34 @@ export class ListHomeComponent implements OnInit {
 
   ngOnInit(): void { 
     //add helps
+    this.listHelp = [
+      {
+        id: 1,
+        descripcion: "ES UNA EMERGENCIA, necesito ayuda lo mas pronto posible.",
+        fecha_hora: new Date(),
+        lugar: "Cerca del Mercado Municipal",
+        estado: 0,
+        foto: "",
+        respuesta: "",
+        municipio_id: 257,
+        categoria: -1,
+        importancia: 1,
+        usuario_id: 19
+      },
+      {
+        id: 2,
+        descripcion: "Un perro me mordio",
+        fecha_hora: new Date(),
+        lugar: "Cerca de la cancha de futbol",
+        estado: 0,
+        foto: "",
+        respuesta: "La ayuda ya va en camino",
+        municipio_id: 257,
+        categoria: -1,
+        importancia: 1,
+        usuario_id: 19
+      }
+    ];
   }
 
   showItem(help: Help) {

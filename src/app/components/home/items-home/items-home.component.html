@@ -30,18 +30,6 @@
         </div>
         <div class="card-body__container">
             <div class="flex-button-options">
-                <button type="button" class="btn btn-primary flex-button" (click)="answerHelp()"
-                *ngIf="this.loginServ.SESSION?.access == 0">
-                    <span class="material-icons">send</span>&nbsp;Responder
-                </button>
-                <button type="button" class="btn btn-dark flex-button" (click)="ignoreHelp()"
-                *ngIf="this.loginServ.SESSION?.access == 0">
-                    <span class="material-icons">thumb_down</span>&nbsp;Ignorar
-                </button>
-                <div class="bg-dark p-2"
-                *ngIf="this.loginServ.SESSION?.access == 1">
-                    Estado: <span class="text-bold">{{help.estado == 0 ? 'Pendiente': help.estado == 1 ? 'Respondida' : 'Rechazada'}}</span>
-                </div>
                 <button type="button" class="btn btn-outline-info flex-button" data-bs-toggle="modal"
                     data-bs-target="#helpModal" (click)="showHelp()">
                     <span class="material-icons">info</span>&nbsp;Ver más

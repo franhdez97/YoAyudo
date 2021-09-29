@@ -12,9 +12,6 @@ export class InterceptorService {
   constructor(private router: Router) {}
 
   show(): void {
-    // const URL = this.router.url.replace('/','');
-    // if(!URL.includes('home') && !URL.includes('community')) { }
-    
     this.isLoading$.next(true);
   }
   hide(): void {
